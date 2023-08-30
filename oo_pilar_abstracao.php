@@ -6,8 +6,19 @@ class Funcionario
     public $numFilhos = null;
 
 
-    //getters e setters
-    function setNome($nome)
+    //getters e setters (overloading / sobrecarga)
+
+    function __set($atributo, $valor)
+    {
+        $this->$atributo = $valor;
+    }
+
+    function __get($atributo)
+    {
+        return $this->$atributo;
+    }
+
+    /*function setNome($nome)
     {
         $this->nome = $nome;
     }
@@ -35,7 +46,7 @@ class Funcionario
     function getNumFilhos()
     {
         return $this->numFilhos;
-    }
+    }*/
 
     //metodos
     function resumirCadFunc()
@@ -58,9 +69,9 @@ class Funcionario
 }
 
 $y = new Funcionario();
-$y->setNome('Henrique');
-$y->setTelefone(81988054875);
-$y->setNumFilhos(0);
+$y->__set('nome', 'Weslley');
+$y->__set('telefone', '11933948166');
+$y->__set('numFilhos', '4');
 //echo $y->resumirCadFunc();
 echo '<br>';
 echo $y->modificarNumFilhos(3);
@@ -70,6 +81,5 @@ echo '<br>';
 echo $y->modificarTelefone(81988063326);
 echo '<br>';
 echo '<br>';
-echo $y->getNome() . ' possui ' . $y->getNumFilhos() . ' filhos e seu numero de telefone é ' . $y->getTelefone();
-
+echo $y->__get('nome') . ' possui ' . $y->__get('numFilhos') . ' filhos e seu numero de telefone é ' . $y->__get('telefone');
 ?>
